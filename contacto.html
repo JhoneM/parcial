@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contacto - Jhoneybis Mendez</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<header>
+    <div class="logo">FICHA PERSONAL</div>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li>Contacto</li>
+        </ul>
+        <button class="theme-toggle" aria-label="Cambiar tema" id="changeColor">🌙</button>
+    </div>
+</header>
+
+<h2 class="main-title">Jhoneybis Alirio Mendez Peña</h2>
+
+<main class="card">
+    <div class="card-info">
+        <form id="contact-form" class="form-cont">
+            <h2>Contacto</h2>
+
+            <div id="feedback-message"></div>
+
+            <div>
+                <label for="nombre">Nombre y Apellido:</label>
+                <input type="text" id="nombre" name="nombre">
+            </div>
+            <div>
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" name="edad" min="1" max="100">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div>
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" name="comentario"></textarea>
+            </div>
+
+            <button type="submit">Enviar</button>
+            <button id="deleteForm"> Borrar</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <img src="img/logo-uade.jpg" alt="Logo UADE" class="footer-logo">
+
+    <p>Todos los derechos reservados</p>
+
+    <a href="https://github.com/JhoneM/parcial" target="_blank"><img src="img/github-logo.png" alt="Logo GitHub" class="github-icon"></a>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        let color = localStorage.getItem('colorFondo')
+        if (color) {
+            $("body").css("background-color", color);
+
+            if (color === 'black') {
+                $("body").css("color", "white");
+            } else {
+                $("body").css("color", "black");
+            }
+        } else {
+            $("body").css("background-color", "black");
+            localStorage.setItem('colorFondo', 'black');
+        }
+
+        $("#deleteForm").click(function(event) {
+            event.preventDefault();
+            $("input").removeClass("error-field");
+            $("#contact-form")[0].reset();
+            $("#feedback-message").css("display", "none");
+        })
+
+        $("#changeColor").on('click', function () {
+            if (color == "white") {
+                $("body").css("background-color", "black");
+                $("body").css("color", "white");
+                localStorage.setItem('colorFondo', 'black');
+                color = "black"
+            } else {
+                color = "white"
+                $("body").css("color", "black");
+                $("body").css("background-color", "white");
+                localStorage.setItem('colorFondo', 'white');
+            }
+        });
+
+        $("#contact-form").on("submit", function(event) {
+            event.preventDefault();
+            let nombre = $("#nombre");
+            let edad = $("#edad");
+            let email = $("#email");
+            let comentario = $("#comentario");
+            let feedback = $("#feedback-message");
+
+            let isValid = true;
+            $("input").removeClass("error-field");
+
+            feedback.hide().removeClass("success-message error-message");
+
+            if (nombre.val().trim() === "") {
+                isValid = false;
+                nombre.addClass("error-field");
+            }
+
+            if (edad.val().trim() === "") {
+                isValid = false;
+                edad.addClass("error-field");
+            }
+
+            if (email.val().trim() === "") {
+                isValid = false;
+                email.addClass("error-field");
+            }
+
+            if (comentario.val().trim() === "") {
+                isValid = false;
+                comentario.addClass("error-field");
+            }
+
+            if (isValid) {
+                feedback.text("Felicidades, formulario enviado")
+                    .addClass("success-message")
+                    .show();
+
+                $("#contact-form")[0].reset();
+
+            } else {
+                feedback.text("Error, debe completar todos los campos")
+                    .addClass("error-message")
+                    .show();
+            }
+        });
+
+    })
+</script>
+
+</body>
+</html>

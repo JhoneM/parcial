@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Ficha Personal - Jhoneybis Mendez</title>
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<header>
+  <div class="logo">FICHA PERSONAL</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li>Inicio</li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <button class="theme-toggle" aria-label="Cambiar tema" id="changeColor">🌙</button>
+  </div>
+</header>
+
+<h2 class="main-title">Jhoneybis Alirio Mendez Peña</h2>
+
+<main class="card">
+  <div class="card-info">
+    <p>
+      <strong>Legajo:</strong>
+      <span class="value">1164567</span>
+    </p>
+    <p>
+      <strong>Carrera:</strong>
+      <span class="value">Ingenieria en informatica</span>
+    </p>
+    <p>
+      <strong>Materia:</strong>
+      <span class="value">Diseño y desarrollo Web</span>
+    </p>
+    <p>
+      <strong>Curso:</strong>
+      <span class="value">1234</span>
+    </p>
+  </div>
+  <div class="profile-pic">
+    <img src="img/foto-jhone.png" alt="foto jhone">
+  </div>
+</main>
+
+<section class="buttons-section">
+  <a href="https://jhonem.github.io/fanpage/" target="_blank" class="btn">Fan Page</a>
+  <a href="https://jhonem.github.io/ladingHermes/" target="_blank" class="btn">Local comercial</a>
+</section>
+
+<footer>
+  <img src="img/logo-uade.jpg" alt="Logo UADE" class="footer-logo">
+
+  <p>Todos los derechos reservados</p>
+
+  <a href="https://github.com/JhoneM/parcial" target="_blank"><img src="img/github-logo.png" alt="Logo GitHub" class="github-icon"></a>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    let color = localStorage.getItem('colorFondo');
+
+    if (color){
+      $("body").css("background-color", color);
+
+      if (color === "black") {
+        $("body").css("color", "white");
+      } else {
+        $("body").css("color", "black");
+      }
+    } else {
+      $("body").css("background-color", "black");
+      localStorage.setItem('colorFondo', 'black');
+    }
+
+    $("#changeColor").on('click', function() {
+      if (color == "white") {
+        $("body").css("background-color", "black");
+        $("body").css("color", "white");
+        localStorage.setItem('colorFondo', 'black');
+        color = "black"
+      } else{
+        color = "white"
+        $("body").css("background-color", "white");
+        $("body").css("color", "black");
+        localStorage.setItem('colorFondo', 'white');
+      }
+    });
+
+  });
+</script>
+
+</body>
+</html>
